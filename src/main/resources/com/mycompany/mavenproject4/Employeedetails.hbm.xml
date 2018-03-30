@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2018 11:14:46 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mycompany.mavenproject4.Employeedetails" table="employeedetails" catalog="bd_commande" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="ename" type="string">
+            <column name="ENAME" length="50" not-null="true" />
+        </property>
+        <property name="enumber" type="string">
+            <column name="ENUMBER" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
