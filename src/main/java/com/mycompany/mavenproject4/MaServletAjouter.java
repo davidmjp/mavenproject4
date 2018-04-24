@@ -39,24 +39,26 @@ public class MaServletAjouter extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
- 
             
             Employeedetails employee = new Employeedetails();
             String ename = request.getParameter("ename");
             String enumber = request.getParameter("enumber");
-            employee.setEname(ename);
-            employee.setEnumber(enumber);
 
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            session.save(employee);
-            transaction.commit();
-            session.close();
+            if (ename != "" || enumber != "") { // Pas d'ajout si rien n'a été entré.
+                employee.setEname(ename);
+                employee.setEnumber(enumber);
+
+                Session session = NewHibernateUtil.getSessionFactory().openSession();
+                Transaction transaction = session.beginTransaction();
+                session.save(employee);
+                transaction.commit();
+                session.close();
+
+                HttpSession sessionW = request.getSession(true); // Session qui permet de récupérer ma donneePassage
+                sessionW.setAttribute("donneePassage", 1); // Pour dire qu'une donnée a été ajoutée : pour afficher l'alert
+            }
             
-            HttpSession sessionW = request.getSession(true); // Session qui permet de récupérer ma donneePassage
-            sessionW.setAttribute("donneePassage", 1);
-            
-            RequestDispatcher rd = request.getRequestDispatcher("jspSaisie.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("jspSaisie.jsp"); // Redirection vers ma jsp, je ne dois rien afficher dans cette page.
             rd.forward(request, response);
             
         }

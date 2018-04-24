@@ -15,7 +15,8 @@
         <% 
             int donneePassage=0;
             if(session.getAttribute("donneePassage") != null) donneePassage = (int) session.getAttribute("donneePassage");
-            if (donneePassage == 1) out.print("<script type='text/javascript'>alert('Employé(e) ajouté(e) !');</script>"); 
+            if (donneePassage == 1) out.print("<script type='text/javascript'>alert('Employé(e) ajouté(e) !');</script>");
+            session.setAttribute("donneePassage", 0); // Pour éviter de revoir l'alert quand on revient sur cette page
         %>
         
         <form action="MaServletAjouter" method="POST">
